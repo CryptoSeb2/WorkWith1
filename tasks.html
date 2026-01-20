@@ -35,6 +35,13 @@
   <p class="small">Barcelona only. Click a task to confirm you can do it.</p>
 </div>
 
+<div id="tasksList" class="grid two" style="margin-top:12px;"></div>
+
+    <div class="card">
+  <div class="h2">Posted tasks</div>
+  <p class="small">Barcelona only. Click a task to confirm you can do it.</p>
+</div>
+
 <div class="grid two" style="margin-top:12px;">
 
   <!-- Example Task 1 -->
@@ -109,5 +116,46 @@
   </div>
 
   <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+<script>
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzzgcHoAbuYOY2bN77VhXQky9OHNOEnp2jOulGRCwHolRBrqeOxMLvBEgbQ9SbjtTHf/exec";
+
+  function esc(s) {
+    return String(s || "").replace(/[&<>"']/g, m => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
+    }[m]));
+  }
+
+  async function loadTasks() {
+    const res = await fetch(SCRIPT_URL + "?action=list");
+    const data = await res.json();
+
+    const list = document.getElementById("tasksList");
+
+    if (!data.ok || !data.tasks || data.tasks.length === 0) {
+      list.innerHTML = "<div class='card'><p class='small'>No tasks yet.</p></div>";
+      return;
+    }
+
+    list.innerHTML = data.tasks.map(t => {
+      const confirmUrl =
+        `confirm-task.html?task_id=${encodeURIComponent(t.created_at)}&title=${encodeURIComponent(t.title)}&location=${encodeURIComponent(t.location)}&datetime=${encodeURIComponent(t.datetime)}&pay=%E2%82%AC${encodeURIComponent(t.net_pay)}`;
+
+      return `
+        <div class="card">
+          <div class="pill">${esc(t.category)}</div>
+          <div class="h2" style="margin-top:8px;">${esc(t.title)}</div>
+          <p class="small">${esc(t.datetime)} • ${esc(t.location)}</p>
+          <p class="small"><b>Earn €${esc(t.net_pay)}</b> (net)</p>
+          <div class="row" style="margin-top:12px;">
+            <a class="btn" href="${confirmUrl}">I can do this</a>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  loadTasks();
+</script>
+
 </body>
 </html>
