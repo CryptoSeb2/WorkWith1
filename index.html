@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>WorkWith — Your first real job, faster.</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div class="nav">
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:14px;">
+      <a class="brand" href="index.html">
+        <span style="font-size:18px;">WorkWith</span>
+        <span class="badge">Barcelona • MVP</span>
+      </a>
+      <div class="navlinks">
+        <a href="tasks.html">Tasks</a>
+        <a href="careers.html">Careers</a>
+        <a href="hire.html">For Companies</a>
+        <a class="btn" href="post-task.html">Post a Task</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container hero">
+    <div class="kicker">WorkWith</div>
+    <h1>Your first real job, faster.</h1>
+    <p>
+      WorkWith helps people find paid work in two ways: <b>Tasks</b> (local paid help like dog walking),
+      and <b>Careers</b> (entry-level roles at great companies).
+    </p>
+    <div class="row">
+      <a class="btn" href="post-task.html">Post a Task</a>
+      <a class="btn secondary" href="tasks.html">Browse Tasks</a>
+      <a class="btn secondary" href="careers.html">Explore Careers</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="grid two">
+      <div class="card">
+        <div class="pill">⚡ WorkWith Tasks</div>
+        <div class="h2">Paid local help, fast.</div>
+        <p class="small">Post a task like “walk my dog today” or “help move a couch.” Workers see what they’ll earn (net). No surprises.</p>
+        <hr/>
+        <div class="row">
+          <a class="btn" href="post-task.html">Post a Task</a>
+          <a class="btn secondary" href="tasks.html">How it works</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="pill">🎓 WorkWith Careers</div>
+        <div class="h2">Entry-level jobs that lead somewhere.</div>
+        <p class="small">We match early-career talent with real roles at startups and growing teams in Barcelona. Apply once — we help you get hired.</p>
+        <hr/>
+        <div class="row">
+          <a class="btn" href="careers.html">Apply</a>
+          <a class="btn secondary" href="hire.html">Hire with WorkWith</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid three" style="margin-top:14px;">
+      <div class="card">
+        <div class="h2">Fair fees</div>
+        <p class="small">Posters set a total budget. Workers see net earnings. WorkWith takes a small service fee.</p>
+      </div>
+      <div class="card">
+        <div class="h2">Trust-first</div>
+        <p class="small">Clear pricing, clear scope, and basic verification + ratings as we scale.</p>
+      </div>
+      <div class="card">
+        <div class="h2">Barcelona-first</div>
+        <p class="small">We start local, build quality, and expand only after repeat usage and strong outcomes.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      © <span id="y"></span> WorkWith • <a href="#" style="text-decoration:underline;">Privacy</a> • <a href="#" style="text-decoration:underline;">Terms</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
