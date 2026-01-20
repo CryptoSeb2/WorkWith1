@@ -29,7 +29,7 @@
     <div class="grid two">
       <div class="card">
         <div class="h2">Task details</div>
-       <form id="taskForm" action="https://formspree.io/f/https://formspree.io/f/xdaalqob" method="POST">
+    
 
           <label>Task title</label>
           <input id="title" required placeholder="Walk my dog today (Eixample)"/>
@@ -64,14 +64,6 @@
           <p class="note">Service fee is 5%. Worker sees net earnings.</p>
 
           <div class="row" style="margin-top:12px;">
-            <a
-  class="btn"
-  href="https://tally.so/r/Np75lW"
-  target="_blank"
-  rel="noopener"
->
-  Publish task
-</a>
 
             <a class="btn secondary" href="tasks.html">Back</a>
           </div>
@@ -115,7 +107,7 @@
   <p class="note">Service fee is 5%. Worker sees net earnings.</p>
 
   <div class="row" style="margin-top:12px;">
-    <button class="btn" type="submit">Publish task</button>
+    <button class="btn" type="submit">Publish task</>
     <a class="btn secondary" href="tasks.html">Back</a>
   </div>
 
@@ -173,9 +165,7 @@
     document.getElementById('budget').addEventListener('input', updatePricing);
     updatePricing();
 
-    function submitTask(){
-      // MVP placeholder: in a real build, send this to your backend or form provider
-      const payload = {
+    
         title: document.getElementById('title').value,
         category: document.getElementById('category').value,
         location: document.getElementById('location').value,
@@ -184,11 +174,7 @@
         budget: Number(document.getElementById('budget').value),
         feeRate
       };
-      console.log("Task submitted (MVP):", payload);
-      alert("Published! (MVP)\nNext step: connect this form to a database / email.");
-      document.getElementById('taskForm').reset();
-      document.getElementById('budget').value = 120;
-      updatePricing();
+      
     }
   </script>
 </body>
