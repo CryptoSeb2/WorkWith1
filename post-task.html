@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Post a Task — WorkWith Tasks</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div class="nav">
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:14px;">
+      <a class="brand" href="index.html"><span style="font-size:18px;">WorkWith</span><span class="badge">Post a Task</span></a>
+      <div class="navlinks">
+        <a href="tasks.html">Tasks</a>
+        <a href="careers.html">Careers</a>
+        <a href="hire.html">For Companies</a>
+        <a class="btn" href="post-task.html">Post a Task</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container hero">
+    <div class="kicker">WorkWith Tasks</div>
+    <h1>Post a task in Barcelona.</h1>
+    <p>Set your total budget. Workers see what they’ll earn (net). WorkWith takes a 5% service fee.</p>
+  </div>
+
+  <div class="container">
+    <div class="grid two">
+      <div class="card">
+        <div class="h2">Task details</div>
+        <form id="taskForm" onsubmit="event.preventDefault(); submitTask();">
+          <label>Task title</label>
+          <input id="title" required placeholder="Walk my dog today (Eixample)"/>
+
+          <label>Category</label>
+          <select id="category" required>
+            <option value="">Select…</option>
+            <option>Dog walking</option>
+            <option>Cleaning</option>
+            <option>Moving help</option>
+            <option>Event help</option>
+            <option>Language practice</option>
+            <option>Tech help</option>
+            <option>Other</option>
+          </select>
+
+          <label>Location</label>
+          <input id="location" required placeholder="Eixample, Poblenou, Gràcia…"/>
+
+          <label>Date & time</label>
+          <input id="datetime" required placeholder="Today 18:00–19:00"/>
+
+          <label>Description</label>
+          <textarea id="desc" required placeholder="Be specific: what, where, how long, any supplies needed..."></textarea>
+
+          <hr/>
+
+          <label>Total budget (poster pays)</label>
+          <input id="budget" type="number" min="10" step="1" value="120" required/>
+
+          <p class="note">Service fee is 5%. Worker sees net earnings.</p>
+
+          <div class="row" style="margin-top:12px;">
+            <button class="btn" type="submit">Publish task (MVP)</button>
+            <a class="btn secondary" href="tasks.html">Back</a>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="h2">Pricing preview</div>
+        <p class="small">This is what will be shown.</p>
+
+        <div class="card" style="background: rgba(0,0,0,.12);">
+          <div class="kicker">Poster sees</div>
+          <div class="h2" style="margin:8px 0;">Total budget: €<span id="posterTotal">120</span></div>
+          <p class="small">WorkWith fee (5%): €<span id="feeAmt">6</span></p>
+          <p class="small">Worker receives: €<span id="workerNet">114</span></p>
+        </div>
+
+        <div class="card" style="background: rgba(0,0,0,.12); margin-top:12px;">
+          <div class="kicker">Worker sees</div>
+          <div class="h2" style="margin:8px 0;">Earn €<span id="workerNet2">114</span></div>
+          <p class="small">Clear scope • Clear time • Paid</p>
+        </div>
+
+        <hr/>
+        <p class="note">
+          MVP note: this page does not process payments yet. For launch, submissions can email you or write to a simple database (Airtable/Sheets/Supabase).
+        </p>
+      </div>
+    </div>
+
+    <div class="footer">© <span id="y"></span> WorkWith</div>
+  </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    const feeRate = 0.05;
+
+    function round2(n){ return Math.round(n * 100) / 100; }
+
+    function updatePricing(){
+      const total = Number(document.getElementById('budget').value || 0);
+      const fee = round2(total * feeRate);
+      const net = round2(total - fee);
+
+      document.getElementById('posterTotal').textContent = total.toFixed(0);
+      document.getElementById('feeAmt').textContent = fee.toFixed(0);
+      document.getElementById('workerNet').textContent = net.toFixed(0);
+      document.getElementById('workerNet2').textContent = net.toFixed(0);
+    }
+
+    document.getElementById('budget').addEventListener('input', updatePricing);
+    updatePricing();
+
+    function submitTask(){
+      // MVP placeholder: in a real build, send this to your backend or form provider
+      const payload = {
+        title: document.getElementById('title').value,
+        category: document.getElementById('category').value,
+        location: document.getElementById('location').value,
+        datetime: document.getElementById('datetime').value,
+        desc: document.getElementById('desc').value,
+        budget: Number(document.getElementById('budget').value),
+        feeRate
+      };
+      console.log("Task submitted (MVP):", payload);
+      alert("Published! (MVP)\nNext step: connect this form to a database / email.");
+      document.getElementById('taskForm').reset();
+      document.getElementById('budget').value = 120;
+      updatePricing();
+    }
+  </script>
+</body>
+</html>
