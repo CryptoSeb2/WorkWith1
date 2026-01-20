@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>WorkWith Careers — Your first real job, faster.</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div class="nav">
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:14px;">
+      <a class="brand" href="index.html"><span style="font-size:18px;">WorkWith</span><span class="badge">Careers</span></a>
+      <div class="navlinks">
+        <a href="tasks.html">Tasks</a>
+        <a href="careers.html">Careers</a>
+        <a href="hire.html">For Companies</a>
+        <a class="btn" href="post-task.html">Post a Task</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container hero">
+    <div class="kicker">WorkWith Careers</div>
+    <h1>Entry-level roles that lead somewhere.</h1>
+    <p>Barcelona-first. International-friendly. Apply once — we help you prep, match, and get hired.</p>
+    <div class="row">
+      <a class="btn" href="#apply">Apply</a>
+      <a class="btn secondary" href="hire.html">I’m hiring</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="grid three">
+      <div class="card">
+        <div class="h2">Roles we start with</div>
+        <p class="small">Customer Support (EN/FR/DE), Ops Associate, Junior Account Manager, Recruiting/HR Coordinator, Tech Support / QA.</p>
+      </div>
+      <div class="card">
+        <div class="h2">What you get</div>
+        <p class="small">CV feedback, interview prep, and curated matching — not endless applications.</p>
+      </div>
+      <div class="card">
+        <div class="h2">What we don’t do</div>
+        <p class="small">No fake “entry-level” roles requiring 3–5 years. No unpaid internships.</p>
+      </div>
+    </div>
+
+    <div id="apply" class="card" style="margin-top:14px;">
+      <div class="h2">Apply (MVP)</div>
+      <p class="small">This is a simple MVP form. Submitting sends your info to our team for review.</p>
+      <form onsubmit="event.preventDefault(); alert('Submitted! (MVP)');">
+        <label>Full name</label>
+        <input required placeholder="Your name"/>
+
+        <label>Email</label>
+        <input required type="email" placeholder="you@email.com"/>
+
+        <label>Languages</label>
+        <input placeholder="English, Spanish, Catalan, French..."/>
+
+        <label>What roles are you aiming for?</label>
+        <input placeholder="Customer Support, Ops, SDR..."/>
+
+        <label>Link to CV / LinkedIn</label>
+        <input placeholder="https://..."/>
+
+        <label>Anything else?</label>
+        <textarea placeholder="Availability, visa status, salary expectations..."></textarea>
+
+        <div style="margin-top:12px;" class="row">
+          <button class="btn" type="submit">Submit application</button>
+          <a class="btn secondary" href="index.html">Back</a>
+        </div>
+        <p class="note">By submitting, you agree to be contacted about roles. (Add full Terms later.)</p>
+      </form>
+    </div>
+
+    <div class="footer">© <span id="y"></span> WorkWith</div>
+  </div>
+
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>
