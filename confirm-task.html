@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>WorkWith | Confirm a Task</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div class="nav">
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:14px;">
+      <a class="brand" href="index.html">
+        <span style="font-size:18px;">WorkWith</span>
+        <span class="badge">Barcelona • MVP</span>
+      </a>
+      <div class="navlinks">
+        <a href="tasks.html">Tasks</a>
+        <a href="careers.html">Careers</a>
+        <a href="hire.html">For Companies</a>
+        <a class="btn" href="post-task.html">Post a Task</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="margin-top:24px;">
+    <div class="card">
+      <div class="h2">Confirm you can do this task</div>
+      <p class="small">We’ll connect you to the poster.</p>
+
+      <!-- Replace XXXXXXXX with your WORKER Formspree endpoint -->
+      <form action="https://formspree.io/f/XXXXXXXX" method="POST">
+
+        <label>Task</label>
+        <input id="task_title" name="task_title" readonly />
+
+        <label>Location</label>
+        <input id="task_location" name="task_location" readonly />
+
+        <label>Date & time</label>
+        <input id="task_datetime" name="task_datetime" readonly />
+
+        <label>Pay (net)</label>
+        <input id="task_pay" name="task_pay" readonly />
+
+        <hr/>
+
+        <label>Your name</label>
+        <input name="worker_name" required placeholder="Your name" />
+
+        <label>Your email</label>
+        <input name="worker_email" type="email" required placeholder="you@email.com" />
+
+        <label>WhatsApp / phone</label>
+        <input name="worker_phone" required placeholder="+34..." />
+
+        <label>Anything to add (optional)</label>
+        <textarea name="worker_note" placeholder="Experience, availability, questions…"></textarea>
+
+        <input type="hidden" name="_subject" value="WorkWith: Worker confirmed a task">
+
+        <div class="row" style="margin-top:12px;">
+          <button class="btn" type="submit">Confirm</button>
+          <a class="btn secondary" href="tasks.html">Back to tasks</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const p = new URLSearchParams(window.location.search);
+    const set = (id, key) => document.getElementById(id).value = p.get(key) || "";
+    set("task_title", "title");
+    set("task_location", "location");
+    set("task_datetime", "datetime");
+    set("task_pay", "pay");
+  </script>
+</body>
+</html>
