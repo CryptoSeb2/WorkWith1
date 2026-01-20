@@ -30,11 +30,7 @@
       <div class="card">
         <div class="h2">Task details</div>
 
-        <form
-  id="taskForm"
-  action="https://formspree.io/f/xdaalqob"
-  method="POST"
->
+        <form id="taskForm">
 
   
   <input id="title" name="title" required placeholder="Walk my dog today (Eixample)" />
@@ -146,5 +142,31 @@
       
     }
   </script>
+  <script>
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzzgcHoAbuYOY2bN77VhXQky9OHNOEnp2jOulGRCwHolRBrqeOxMLvBEgbQ9SbjtTHf/exec";
+
+  document.getElementById("taskForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const fd = new FormData(e.target);
+
+    const res = await fetch(SCRIPT_URL + "?action=create", {
+      method: "POST",
+      body: new URLSearchParams(fd),
+    });
+
+    const data = await res.json();
+
+    if (data.ok) {
+      alert("Task posted! ✅");
+      e.target.reset();
+      window.location.href = "tasks.html";
+    } else {
+      alert("Something went wrong. Try again.");
+      console.log(data);
+    }
+  });
+</script>
+
 </body>
 </html>
