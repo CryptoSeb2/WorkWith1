@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>WorkWith Tasks — Paid local help</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div class="nav">
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:14px;">
+      <a class="brand" href="index.html"><span style="font-size:18px;">WorkWith</span><span class="badge">Tasks</span></a>
+      <div class="navlinks">
+        <a href="tasks.html">Tasks</a>
+        <a href="careers.html">Careers</a>
+        <a href="hire.html">For Companies</a>
+        <a class="btn" href="post-task.html">Post a Task</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container hero">
+    <div class="kicker">WorkWith Tasks</div>
+    <h1>Paid local help — fast and fair.</h1>
+    <p>Post a task, set your total budget, and we’ll help match you with someone reliable. Workers see the net amount they’ll earn.</p>
+    <div class="row">
+      <a class="btn" href="post-task.html">Post a Task</a>
+      <a class="btn secondary" href="#rules">Rules</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="grid two">
+      <div class="card">
+        <div class="h2">Examples</div>
+        <ul class="small">
+          <li>Dog walking (today)</li>
+          <li>Help moving a couch</li>
+          <li>House cleaning</li>
+          <li>Event help (2–4 hours)</li>
+          <li>Language practice (EN/ES)</li>
+          <li>Basic tech setup</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="h2">How pricing works</div>
+        <p class="small">
+          Posters choose the total budget. WorkWith takes a small service fee. Workers see and earn the net payout.
+          Example: total €120 → worker earns €114 (5% fee).
+        </p>
+        <hr/>
+        <a class="btn" href="post-task.html">Try the calculator</a>
+      </div>
+    </div>
+
+    <div id="rules" class="card" style="margin-top:14px;">
+      <div class="h2">Launch rules (v1)</div>
+      <ul class="small">
+        <li>Paid tasks only.</li>
+        <li>Clear scope, location, and time required.</li>
+        <li>No illegal, unsafe, or discriminatory tasks.</li>
+        <li>Keep communication + payment on-platform (for safety).</li>
+      </ul>
+      <p class="note">We’ll publish full Terms as we move from MVP → public beta.</p>
+    </div>
+
+    <div class="footer">
+      © <span id="y"></span> WorkWith
+    </div>
+  </div>
+
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>
