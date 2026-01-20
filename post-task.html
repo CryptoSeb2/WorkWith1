@@ -29,7 +29,8 @@
     <div class="grid two">
       <div class="card">
         <div class="h2">Task details</div>
-        <form id="taskForm" onsubmit="event.preventDefault(); submitTask();">
+       <form id="taskForm" action="https://formspree.io/f/https://formspree.io/f/xdaalqob" method="POST">
+
           <label>Task title</label>
           <input id="title" required placeholder="Walk my dog today (Eixample)"/>
 
@@ -58,6 +59,7 @@
 
           <label>Total budget (poster pays)</label>
           <input id="budget" type="number" min="10" step="1" value="120" required/>
+<input type="hidden" name="_subject" value="New WorkWith Task Submission">
 
           <p class="note">Service fee is 5%. Worker sees net earnings.</p>
 
@@ -73,7 +75,54 @@
 
             <a class="btn secondary" href="tasks.html">Back</a>
           </div>
-        </form>
+        <form
+  id="taskForm"
+  action="https://formspree.io/f/xdaalqob"
+  method="POST"
+>
+
+  <label>Task title</label>
+  <input id="title" name="title" required placeholder="Walk my dog today (Eixample)" />
+
+  <label>Category</label>
+  <select id="category" name="category" required>
+    <option>Dog walking</option>
+    <option>Cleaning</option>
+    <option>Moving help</option>
+    <option>Event help</option>
+    <option>Language practice</option>
+    <option>Tech help</option>
+    <option>Other</option>
+  </select>
+
+  <label>Location</label>
+  <input id="location" name="location" required placeholder="Eixample, Poblenou, Gràcia..." />
+
+  <label>Date & time</label>
+  <input id="datetime" name="datetime" required placeholder="Today 18:00–19:00" />
+
+  <label>Description</label>
+  <textarea id="desc" name="description" required></textarea>
+
+  <hr/>
+
+  <label>Total budget (poster pays)</label>
+  <input id="budget" name="budget" type="number" min="10" step="1" value="120" required />
+
+  <!-- email subject -->
+  <input type="hidden" name="_subject" value="New WorkWith Task Submission">
+
+  <p class="note">Service fee is 5%. Worker sees net earnings.</p>
+
+  <div class="row" style="margin-top:12px;">
+    <button class="btn" type="submit">Publish task</button>
+    <a class="btn secondary" href="tasks.html">Back</a>
+  </div>
+
+</form>
+
+>
+
       </div>
 
       <div class="card">
