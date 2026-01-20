@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Hire with WorkWith — Barcelona</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div class="nav">
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:14px;">
+      <a class="brand" href="index.html"><span style="font-size:18px;">WorkWith</span><span class="badge">For Companies</span></a>
+      <div class="navlinks">
+        <a href="tasks.html">Tasks</a>
+        <a href="careers.html">Careers</a>
+        <a href="hire.html">For Companies</a>
+        <a class="btn" href="post-task.html">Post a Task</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container hero">
+    <div class="kicker">WorkWith for Companies</div>
+    <h1>Hire strong junior talent in Barcelona.</h1>
+    <p>We pre-screen early-career candidates and help you hire faster — without drowning in unqualified applicants.</p>
+  </div>
+
+  <div class="container">
+    <div class="grid three">
+      <div class="card">
+        <div class="h2">What we deliver</div>
+        <p class="small">2–5 pre-screened candidates per role, with short summaries and availability.</p>
+      </div>
+      <div class="card">
+        <div class="h2">Roles we start with</div>
+        <p class="small">Support (EN/FR/DE), Ops, Jr AM, Recruiting/HR, Tech Support/QA.</p>
+      </div>
+      <div class="card">
+        <div class="h2">How we price</div>
+        <p class="small">MVP: pay only if you hire. We’ll propose a simple flat fee after the intro call.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <div class="h2">Talk to us (MVP)</div>
+      <form onsubmit="event.preventDefault(); alert('Thanks! (MVP)');">
+        <label>Company name</label>
+        <input required placeholder="Company"/>
+
+        <label>Your name</label>
+        <input required placeholder="Name"/>
+
+        <label>Email</label>
+        <input required type="email" placeholder="you@company.com"/>
+
+        <label>Role you’re hiring for</label>
+        <input placeholder="Customer Support (EN), Ops Associate..."/>
+
+        <label>Notes</label>
+        <textarea placeholder="Start date, salary range, must-have languages..."></textarea>
+
+        <div style="margin-top:12px;" class="row">
+          <button class="btn" type="submit">Request intro</button>
+          <a class="btn secondary" href="index.html">Back</a>
+        </div>
+      </form>
+    </div>
+
+    <div class="footer">© <span id="y"></span> WorkWith</div>
+  </div>
+
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>
