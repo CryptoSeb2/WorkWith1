@@ -26,53 +26,58 @@
     <div class="card">
       <div class="h2">Confirm you can do this task</div>
       <p class="small">We’ll connect you to the poster.</p>
+<form id="confirmForm">
+  <input type="hidden" name="task_id" id="task_id" />
 
-      <!-- Replace XXXXXXXX with your WORKER Formspree endpoint -->
-      <form action="https://formspree.io/f/https://formspree.io/f/mwvvrkan" method="POST">
+  <label>Your name</label>
+  <input name="worker_name" required placeholder="Your name" />
 
-        <label>Task</label>
-        <input id="task_title" name="task_title" readonly />
+  <label>Your email</label>
+  <input name="worker_email" type="email" required placeholder="you@email.com" />
 
-        <label>Location</label>
-        <input id="task_location" name="task_location" readonly />
+  <label>WhatsApp / phone (optional)</label>
+  <input name="worker_phone" placeholder="+34..." />
 
-        <label>Date & time</label>
-        <input id="task_datetime" name="task_datetime" readonly />
+  <div class="row" style="margin-top:12px;">
+    <button class="btn" type="submit">Confirm I can do this</button>
+    <a class="btn secondary" href="tasks.html">Back to tasks</a>
+  </div>
+</form>
 
-        <label>Pay (net)</label>
-        <input id="task_pay" name="task_pay" readonly />
-
-        <hr/>
-
-        <label>Your name</label>
-        <input name="worker_name" required placeholder="Your name" />
-
-        <label>Your email</label>
-        <input name="worker_email" type="email" required placeholder="you@email.com" />
-
-        <label>WhatsApp / phone</label>
-        <input name="worker_phone" required placeholder="+34..." />
-
-        <label>Anything to add (optional)</label>
-        <textarea name="worker_note" placeholder="Experience, availability, questions…"></textarea>
-
-        <input type="hidden" name="_subject" value="WorkWith: Worker confirmed a task">
-
-        <div class="row" style="margin-top:12px;">
-          <button class="btn" type="submit">Confirm</button>
-          <a class="btn secondary" href="tasks.html">Back to tasks</a>
-        </div>
-      </form>
+     
     </div>
   </div>
 
   <script>
-    const p = new URLSearchParams(window.location.search);
-    const set = (id, key) => document.getElementById(id).value = p.get(key) || "";
-    set("task_title", "title");
-    set("task_location", "location");
-    set("task_datetime", "datetime");
-    set("task_pay", "pay");
   </script>
+  <script>
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzzgcHoAbuYOY2bN77VhXQky9OHNOEnp2jOulGRCwHolRBrqeOxMLvBEgbQ9SbjtTHf/exec";
+
+  const params = new URLSearchParams(window.location.search);
+  const taskId = params.get("task_id");
+  document.getElementById("task_id").value = taskId || "";
+
+  document.getElementById("confirmForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const fd = new FormData(e.target);
+
+    const res = await fetch(SCRIPT_URL + "?action=confirm", {
+      method: "POST",
+      body: new URLSearchParams(fd),
+    });
+
+    const data = await res.json();
+
+    if (data.ok) {
+      alert("Confirmed! ✅ We’ll notify the poster.");
+      window.location.href = "tasks.html";
+    } else {
+      alert("Something went wrong. Try again.");
+      console.log(data);
+    }
+  });
+</script>
+
 </body>
 </html>
