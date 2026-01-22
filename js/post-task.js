@@ -1,7 +1,7 @@
 import { auth } from "./firebase-init.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 
-const SCRIPT_URL = "YOUR_SCRIPT_URL_HERE";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzzgcHoAbuYOY2bN77VhXQky9OHNOEnp2jOulGRCwHolRBrqeOxMLvBEgbQ9SbjtTHf/exec";
 
 const form = document.getElementById("postForm");
 const posterUidEl = document.getElementById("poster_uid");
