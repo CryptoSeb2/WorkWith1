@@ -5,8 +5,6 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.4/firebas
 import { getStorage } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-storage.js";
 
 const firebaseConfig = {
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
   apiKey: "AIzaSyD6zzMVCndNQM7P-tn9FEuEkzd4r8DNah4",
   authDomain: "workwith-1f209.firebaseapp.com",
   projectId: "workwith-1f209",
@@ -14,7 +12,6 @@ const firebaseConfig = {
   messagingSenderId: "7158486213",
   appId: "1:7158486213:web:af29768b035e0627114cac",
   measurementId: "G-ZN8E2VMNR2"
-};
 };
 
 const app = initializeApp(firebaseConfig);
