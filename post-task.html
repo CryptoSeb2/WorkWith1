@@ -36,9 +36,11 @@
       <div class="card">
         <div class="h2">Task details</div>
 
-        <form id="taskForm">
+    
 
-  
+  <form id="postForm">
+  <input type="hidden" name="poster_uid" id="poster_uid">
+  <input type="hidden" name="poster_email" id="poster_email">
   <input id="title" name="title" required placeholder="Walk my dog today (Eixample)" />
 
   <label>Category</label>
@@ -79,6 +81,8 @@
 
   <div class="row" style="margin-top:12px;">
     <button class="btn" type="submit">Publish task</>
+      </form>
+
     <a class="btn secondary" href="tasks.html">Back</a>
   </div>
 
