@@ -79,12 +79,15 @@
 
   <p class="note">Service fee is 5%. Worker sees net earnings.</p>
 
-  <div class="row" style="margin-top:12px;">
-    <button class="btn" type="submit">Publish task</>
-      </form>
+  <p class="note">Service fee is 5%. Worker sees net earnings.</p>
 
-    <a class="btn secondary" href="tasks.html">Back</a>
-  </div>
+<div class="row" style="margin-top:12px;">
+  <button class="btn" type="submit">Publish task</button>
+  <a class="btn secondary" href="tasks.html">Back</a>
+</div>
+
+</form>
+
 
 </form>
 
@@ -179,6 +182,70 @@
 </script>
 <script type="module" src="js/firebase-init.js"></script>
 <script type="module" src="js/auth-ui.js"></script>
+
+  </form>
+
+<script type="module">
+  import { auth } from "./js/firebase-init.js";
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzzgcHoAbuYOY2bN77VhXQky9OHNOEnp2jOulGRCwHolRBrqeOxMLvBEgbQ9SbjtTHf/exec"; // must end with /exec
+  const form = document.getElementById("postForm");
+
+  let currentUser = null;
+
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      window.location.href = "login.html";
+      return;
+    }
+    currentUser = user;
+
+    const uidEl = document.getElementById("poster_uid");
+    const emailEl = document.getElementById("poster_email");
+    if (uidEl) uidEl.value = user.uid;
+    if (emailEl) emailEl.value = user.email || "";
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!currentUser) {
+      alert("Please log in first.");
+      window.location.href = "login.html";
+      return;
+    }
+
+    // Ensure hidden fields are filled
+    document.getElementById("poster_uid").value = currentUser.uid;
+    document.getElementById("poster_email").value = currentUser.email || "";
+
+    const fd = new FormData(form);
+
+    const res = await fetch(SCRIPT_URL + "?action=create", {
+      method: "POST",
+      body: new URLSearchParams(fd),
+    });
+
+    const data = await res.json();
+
+    if (data.ok) {
+      alert("Task posted ✅");
+      form.reset();
+      window.location.href = "tasks.html";
+    } else {
+      alert(data.error || "Something went wrong.");
+      console.log(data);
+    }
+  });
+</script>
+
+<script type="module">
+  // your code here
+</script>
+
+</body>
+</html>
 
 </body>
 </html>
