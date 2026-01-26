@@ -113,6 +113,14 @@
 
     list.innerHTML = data.tasks.map(t => {
       const confirmUrl =
+  `confirm-task.html?task_id=${encodeURIComponent(t.created_at)}`
+  + `&title=${encodeURIComponent(t.title)}`
+  + `&location=${encodeURIComponent(t.location)}`
+  + `&datetime=${encodeURIComponent(t.datetime)}`
+  + `&pay=${encodeURIComponent(t.net_pay)}`
+  + `&poster_uid=${encodeURIComponent(t.poster_uid || "")}`
+  + `&poster_email=${encodeURIComponent(t.poster_email || "")}`;
+
         `confirm-task.html?task_id=${encodeURIComponent(t.created_at)}&title=${encodeURIComponent(t.title)}&location=${encodeURIComponent(t.location)}&datetime=${encodeURIComponent(t.datetime)}&pay=%E2%82%AC${encodeURIComponent(t.net_pay)}`;
 
       return `
