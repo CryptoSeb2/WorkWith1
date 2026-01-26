@@ -241,7 +241,18 @@
 </script>
 
 <script type="module">
-  // your code here
+  import { auth } from "./js/firebase-init.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.href = "login.html";
+    return;
+  }
+  document.getElementById("poster_uid").value = user.uid;
+  document.getElementById("poster_email").value = user.email || "";
+});
+
 </script>
 
 </body>
