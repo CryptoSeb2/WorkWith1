@@ -356,3 +356,66 @@ textarea{min-height:110px; resize:vertical}
   padding:8px 10px; border:1px solid var(--line);
   border-radius:999px; color: var(--muted); font-size:13px;
 }
+/* =========================
+   FORCE LIGHT MODE OVERRIDE
+   (paste at very bottom)
+========================= */
+
+html, body{
+  background:#fff !important;
+  color:#111 !important;
+}
+
+.nav{
+  background: rgba(255,255,255,.95) !important;
+  border-bottom:1px solid #eaeaea !important;
+}
+
+.card, .hero, .panel{
+  background:#fff !important;
+  border:1px solid #e6e6e6 !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08) !important;
+}
+
+.badge{
+  background:#f3f3f3 !important;
+  border:1px solid #e6e6e6 !important;
+  color:#555 !important;
+}
+
+.small, .note{
+  color:#555 !important;
+}
+
+a{
+  color: inherit !important;
+}
+
+input, select, textarea{
+  background:#fff !important;
+  color:#111 !important;
+  border:1px solid #d9d9d9 !important;
+}
+
+input::placeholder, textarea::placeholder{
+  color:#888 !important;
+}
+
+.btn{
+  background:#111 !important;
+  color:#fff !important;
+  border:1px solid #111 !important;
+}
+
+.btn.secondary{
+  background:#f2f2f2 !important;
+  color:#111 !important;
+  border:1px solid #e6e6e6 !important;
+}
+h1,h2,h3,h4,.h1,.h2{
+  color:#111 !important;
+}
+p, li, label{
+  color:#222 !important;
+}
+
