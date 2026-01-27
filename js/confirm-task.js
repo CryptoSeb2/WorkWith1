@@ -1,20 +1,26 @@
-// js/confirm-task.js
-const SCRIPT_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxSeyViWYbwOvMkZ2TyzfAmVngznXZO2I60pfUB9C_JlmiBtmUWd2MHAq7ThFJZ6war/exec";
+
+console.log("confirm-task.js loaded ✅");
+
+const form = document.getElementById("confirmForm");
+if (!form) {
+  console.error("confirmForm not found");
+}
 
 const params = new URLSearchParams(window.location.search);
 
-const taskIdEl = document.getElementById("task_id");
-const posterUidEl = document.getElementById("poster_uid");
-const posterEmailEl = document.getElementById("poster_email");
+function setVal(id, v) {
+  const el = document.getElementById(id);
+  if (el) el.value = v || "";
+}
 
-if (taskIdEl) taskIdEl.value = params.get("task_id") || "";
-if (posterUidEl) posterUidEl.value = params.get("poster_uid") || "";
-if (posterEmailEl) posterEmailEl.value = params.get("poster_email") || "";
+setVal("task_id", params.get("task_id"));
+setVal("poster_uid", params.get("poster_uid"));
+setVal("poster_email", params.get("poster_email"));
 
-const form = document.getElementById("confirmForm");
-
-form.addEventListener("submit", async (e) => {
+form?.addEventListener("submit", async (e) => {
   e.preventDefault();
+  console.log("submit clicked ✅");
 
   const body = new URLSearchParams({
     task_id: document.getElementById("task_id")?.value || "",
@@ -26,19 +32,24 @@ form.addEventListener("submit", async (e) => {
     note: document.getElementById("note")?.value || ""
   });
 
-  const res = await fetch(SCRIPT_URL + "?action=logconfirmation", {
-    method: "POST",
-    body
-  });
+  try {
+    const res = await fetch(SCRIPT_URL + "?action=logconfirmation", {
+      method: "POST",
+      body
+    });
 
-  const data = await res.json();
-  console.log("confirm response:", data);
+    const data = await res.json();
+    console.log("server response:", data);
 
-  if (data.ok) {
-    alert("Confirmed! ✅");
-    form.reset();
-    window.location.href = "tasks.html";
-  } else {
-    alert("Confirm failed: " + (data.error || "unknown error"));
+    if (data.ok) {
+      alert("Confirmed! ✅");
+      form.reset();
+      window.location.href = "tasks.html";
+    } else {
+      alert("Confirm failed: " + (data.error || "unknown error"));
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Network error: " + err.message);
   }
 });
