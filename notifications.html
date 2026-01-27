@@ -25,5 +25,15 @@
     <script type="module" src="js/firebase-init.js"></script>
     <script type="module" src="js/auth-ui.js"></script>
     <script type="module" src="js/notifications.js"></script>
+  
+  <script type="module">
+  import { auth } from "./js/firebase-init.js";
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+
+  onAuthStateChanged(auth, (user) => {
+    console.log("AUTH USER:", user ? user.uid : null, user?.email);
+  });
+</script>
+
   </body>
 </html>
