@@ -1,4 +1,4 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxSeyViWYbwOvMkZ2TyzfAmVngznXZO2I60pfUB9C_JlmiBtmUWd2MHAq7ThFJZ6war/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby8d77IHsxtpdSjrm5wl0D1u5KSzmqtzXjN4I4U7ECNVW30bdLzXvj-T_qWap84EIE/exec";
 
 console.log("confirm-task.js loaded ✅");
 
