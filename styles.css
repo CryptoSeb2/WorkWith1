@@ -425,5 +425,19 @@ p, li, label{
   margin-left: -12px; /* increase to -20px if you want it even more left */
   margin-right: 10px;
 }
+/* ---------- HOME HERO CENTERING ---------- */
+.hero {
+  text-align: center;
+}
+
+.hero p {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 720px;
+}
+
+.hero .row {
+  justify-content: center;
+}
 
 
