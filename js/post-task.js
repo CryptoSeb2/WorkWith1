@@ -3,7 +3,7 @@ import { logToSheets } from "./sheets-log.js";
 import { auth } from "./firebase-init.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzzgcHoAbuYOY2bN77VhXQky9OHNOEnp2jOulGRCwHolRBrqeOxMLvBEgbQ9SbjtTHf/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby8d77IHsxtpdSjrm5wl0D1u5KSzmqtzXjN4I4U7ECNVW30bdLzXvj-T_qWap84EIE/exec";
 
 const form = document.getElementById("postForm");
 const posterUidEl = document.getElementById("poster_uid");
