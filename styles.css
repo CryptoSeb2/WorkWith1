@@ -419,3 +419,9 @@ p, li, label{
   color:#222 !important;
 }
 
+.logo{
+  height: 28px;
+  width: auto;
+  vertical-align: middle;
+  margin-right: 10px;
+}
