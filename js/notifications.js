@@ -1,51 +1,48 @@
 import { auth, db } from "./firebase-init.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 import {
-  collection,
-  query,
-  orderBy,
-  limit,
-  onSnapshot
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+  collection, query, where, orderBy, onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-function el(id) { return document.getElementById(id); }
+const listEl = document.getElementById("notificationsList");
+const emptyEl = document.getElementById("notificationsEmpty");
+
+function render(items) {
+  listEl.innerHTML = "";
+  if (!items.length) {
+    emptyEl.style.display = "block";
+    return;
+  }
+  emptyEl.style.display = "none";
+
+  for (const n of items) {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.style.marginTop = "12px";
+    div.innerHTML = `
+      <div class="small"><b>${n.workerName || "Someone"}</b> confirmed: <b>${n.taskTitle || "a task"}</b></div>
+      <div class="small" style="opacity:.8">${new Date(n.createdAt || Date.now()).toLocaleString()}</div>
+    `;
+    listEl.appendChild(div);
+  }
+}
 
 onAuthStateChanged(auth, (user) => {
   if (!user) {
-    // not logged in → send to login
-    window.location.href = "login.html";
+    // not logged in => no notifications to show
+    emptyEl.style.display = "block";
+    emptyEl.textContent = "Please log in to see notifications.";
     return;
   }
 
-  const list = el("notificationsList");
-  const empty = el("notificationsEmpty");
-
-  const itemsRef = collection(db, "notifications", user.uid, "items");
-  const q = query(itemsRef, orderBy("createdAt", "desc"), limit(50));
+  const q = query(
+    collection(db, "notifications"),
+    where("toEmail", "==", user.email),
+    orderBy("createdAt", "desc")
+  );
 
   onSnapshot(q, (snap) => {
-    list.innerHTML = "";
-
-    if (snap.empty) {
-      empty.style.display = "block";
-      return;
-    }
-    empty.style.display = "none";
-
-    snap.forEach((doc) => {
-      const n = doc.data();
-      const div = document.createElement("div");
-      div.className = "card";
-      div.style.marginTop = "12px";
-      div.innerHTML = `
-        <div class="h2" style="font-size:16px;">${n.title ?? "Notification"}</div>
-        <p class="small" style="margin-top:6px;">${n.message ?? ""}</p>
-        <p class="small" style="opacity:.7; margin-top:6px;">
-          ${n.createdAt?.toDate ? n.createdAt.toDate().toLocaleString() : ""}
-        </p>
-      `;
-      list.appendChild(div);
-    });
+    const items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    render(items);
   });
 });
-
