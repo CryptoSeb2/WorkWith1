@@ -1,30 +1,51 @@
 import { auth, db } from "./firebase-init.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-import { collection, query, where, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import {
+  collection,
+  query,
+  orderBy,
+  limit,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
-const list = document.getElementById("notifList");
+function el(id) { return document.getElementById(id); }
 
-onAuthStateChanged(auth, async (user) => {
-  if (!user) return (location.href = "login.html");
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    // not logged in → send to login
+    window.location.href = "login.html";
+    return;
+  }
 
-  const q = query(
-    collection(db, "notifications"),
-    where("poster_uid", "==", user.uid),
-    orderBy("createdAt", "desc")
-  );
+  const list = el("notificationsList");
+  const empty = el("notificationsEmpty");
 
-  const snap = await getDocs(q);
-  if (snap.empty) return (list.textContent = "No notifications yet.");
+  const itemsRef = collection(db, "notifications", user.uid, "items");
+  const q = query(itemsRef, orderBy("createdAt", "desc"), limit(50));
 
-  list.innerHTML = "";
-  snap.forEach((d) => {
-    const n = d.data();
-    const a = document.createElement("a");
-    a.href = `view-profile.html?uid=${encodeURIComponent(n.worker_uid)}`;
-    a.textContent = `✅ ${n.worker_name || "Someone"} confirmed: ${n.task_title || n.task_id}`;
-    a.style.display = "block";
-    a.style.marginTop = "8px";
-    list.appendChild(a);
+  onSnapshot(q, (snap) => {
+    list.innerHTML = "";
+
+    if (snap.empty) {
+      empty.style.display = "block";
+      return;
+    }
+    empty.style.display = "none";
+
+    snap.forEach((doc) => {
+      const n = doc.data();
+      const div = document.createElement("div");
+      div.className = "card";
+      div.style.marginTop = "12px";
+      div.innerHTML = `
+        <div class="h2" style="font-size:16px;">${n.title ?? "Notification"}</div>
+        <p class="small" style="margin-top:6px;">${n.message ?? ""}</p>
+        <p class="small" style="opacity:.7; margin-top:6px;">
+          ${n.createdAt?.toDate ? n.createdAt.toDate().toLocaleString() : ""}
+        </p>
+      `;
+      list.appendChild(div);
+    });
   });
 });
 
