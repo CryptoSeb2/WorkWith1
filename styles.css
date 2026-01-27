@@ -420,8 +420,10 @@ p, li, label{
 }
 
 .logo{
-  height: 28px;
+  height: 84px;
   width: auto;
-  vertical-align: middle;
+  margin-left: -12px; /* increase to -20px if you want it even more left */
   margin-right: 10px;
 }
+
+
