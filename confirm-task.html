@@ -60,6 +60,7 @@
   const params = new URLSearchParams(window.location.search);
   const taskId = params.get("task_id");
   document.getElementById("task_id").value = taskId || "";
+document.getElementById("poster_email").value = params.get("poster_email") || "";
 
   document.getElementById("confirmForm").addEventListener("submit", async (e) => {
     e.preventDefault();
