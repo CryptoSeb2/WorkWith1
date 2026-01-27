@@ -35,6 +35,18 @@ if (form) {
 
     if (data.ok) {
       alert("Task posted! ✅");
+      // create a notification entry in Google Sheets
+await fetch(SCRIPT_URL + "?action=notify", {
+  method: "POST",
+  body: new URLSearchParams({
+    type: "task_posted",
+    taskTitle: fd.get("title"),
+    taskId: data.taskId || "",
+    posterEmail: fd.get("poster_email") || "",
+    createdAt: new Date().toISOString()
+  })
+});
+
       form.reset();
       window.location.href = "tasks.html";
     } else {
