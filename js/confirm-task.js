@@ -1,88 +1,44 @@
-import { auth, db } from "./firebase-init.js";
-import {
-  doc,
-  getDoc,
-  addDoc,
-  collection,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import {
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+// js/confirm-task.js
+const SCRIPT_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
 
 const params = new URLSearchParams(window.location.search);
-const taskId = params.get("task_id");
-document.getElementById("task_id").value = taskId || "";
 
-let currentUser = null;
-let taskData = null;
+const taskIdEl = document.getElementById("task_id");
+const posterUidEl = document.getElementById("poster_uid");
+const posterEmailEl = document.getElementById("poster_email");
 
-onAuthStateChanged(auth, async (u) => {
-  currentUser = u;
+if (taskIdEl) taskIdEl.value = params.get("task_id") || "";
+if (posterUidEl) posterUidEl.value = params.get("poster_uid") || "";
+if (posterEmailEl) posterEmailEl.value = params.get("poster_email") || "";
 
-  if (!taskId) {
-    alert("Missing task_id.");
-    return;
-  }
+const form = document.getElementById("confirmForm");
 
-  const taskRef = doc(db, "tasks", taskId);
-  const taskSnap = await getDoc(taskRef);
-
-  if (!taskSnap.exists()) {
-    alert("Task not found.");
-    return;
-  }
-
-  taskData = { id: taskSnap.id, ...taskSnap.data() };
-
-  // Optional: if not logged in, force login
-  if (!currentUser) {
-    alert("Please log in to confirm tasks.");
-    window.location.href = "login.html";
-  }
-});
-
-document.getElementById("confirmForm").addEventListener("submit", async (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  if (!currentUser) {
-    alert("Please log in.");
-    return;
-  }
-  if (!taskData) {
-    alert("Task not loaded yet.");
-    return;
-  }
-
-  // TODO: replace these with actual form inputs if you have them
-  const worker_name = currentUser.displayName || "Worker";
-  const worker_email = currentUser.email || "";
-
-  // 1) Save confirmation
-  await addDoc(collection(db, "confirmations"), {
-    created_at: serverTimestamp(),
-    task_id: taskData.id,
-    task_title: taskData.title || "",
-    poster_uid: taskData.poster_uid || "",
-    poster_email: taskData.poster_email || "",
-    worker_uid: currentUser.uid,
-    worker_name,
-    worker_email,
-    status: "new"
+  const body = new URLSearchParams({
+    task_id: document.getElementById("task_id")?.value || "",
+    poster_uid: document.getElementById("poster_uid")?.value || "",
+    poster_email: document.getElementById("poster_email")?.value || "",
+    worker_name: document.getElementById("worker_name")?.value || "",
+    worker_email: document.getElementById("worker_email")?.value || "",
+    worker_phone: document.getElementById("worker_phone")?.value || "",
+    note: document.getElementById("note")?.value || ""
   });
 
-  // 2) Create notification for poster
-  await addDoc(collection(db, "notifications"), {
-    created_at: serverTimestamp(),
-    to_uid: taskData.poster_uid || "",
-    type: "task_confirmed",
-    task_id: taskData.id,
-    task_title: taskData.title || "",
-    message: `${worker_name} confirmed your task: ${taskData.title}`,
-    read: false
+  const res = await fetch(SCRIPT_URL + "?action=logconfirmation", {
+    method: "POST",
+    body
   });
 
-  alert("Confirmed! The poster has been notified.");
-  window.location.href = "tasks.html";
+  const data = await res.json();
+  console.log("confirm response:", data);
+
+  if (data.ok) {
+    alert("Confirmed! ✅");
+    form.reset();
+    window.location.href = "tasks.html";
+  } else {
+    alert("Confirm failed: " + (data.error || "unknown error"));
+  }
 });
-
