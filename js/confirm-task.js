@@ -33,10 +33,14 @@ form?.addEventListener("submit", async (e) => {
   });
 
   try {
-    const res = await fetch(SCRIPT_URL + "?action=logconfirmation", {
-      method: "POST",
-      body
-    });
+   const res = await fetch(
+  SCRIPT_URL + "?action=logconfirmation&key=workwith_secret_12345",
+  {
+    method: "POST",
+    body
+  }
+);
+
 
     const data = await res.json();
     console.log("server response:", data);
