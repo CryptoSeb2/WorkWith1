@@ -68,7 +68,22 @@ document.getElementById("poster_email").value = params.get("poster_email") || ""
 
     const fd = new FormData(e.target);
 
-    const res = await fetch(SCRIPT_URL + "?action=confirm", {
+   const res = await fetch(SCRIPT_URL + "?action=logconfirmation", {
+  method: "POST",
+  body: new URLSearchParams({
+    task_id: document.getElementById("task_id").value,
+    poster_uid: document.getElementById("poster_uid").value,
+    poster_email: document.getElementById("poster_email").value,
+    worker_name: document.getElementById("worker_name").value,
+    worker_email: document.getElementById("worker_email").value,
+    worker_phone: document.getElementById("worker_phone").value,
+    note: document.getElementById("note").value
+  })
+});
+
+const data = await res.json();
+console.log("confirm response:", data);
+
       method: "POST",
       body: new URLSearchParams(fd),
     });
