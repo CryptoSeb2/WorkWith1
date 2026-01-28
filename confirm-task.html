@@ -29,19 +29,23 @@
 <form id="confirmForm">
   
   <input type="hidden" name="task_id" id="task_id" />
-  <input type="hidden" name="poster_uid" id="poster_uid">
-<input type="hidden" name="poster_email" id="poster_email">
-<input type="hidden" name="worker_uid" id="worker_uid">
+  <input type="hidden" name="poster_uid" id="poster_uid" />
+<input type="hidden" name="poster_email" id="poster_email" />
+<input type="hidden" name="worker_uid" id="worker_uid" />
+
 
 
   <label>Your name</label>
-  <input name="worker_name" required placeholder="Your name" />
+ <input id="worker_name" name="worker_name" required placeholder="Your name" />
+
 
   <label>Your email</label>
-  <input name="worker_email" type="email" required placeholder="you@email.com" />
+  <input id="worker_email" name="worker_email" type="email" required placeholder="you@email.com" />
+
 
   <label>WhatsApp / phone (optional)</label>
-  <input name="worker_phone" placeholder="+34..." />
+  <input id="worker_phone" name="worker_phone" placeholder="+34..." />
+
 
   <div class="row" style="margin-top:12px;">
     <button class="btn" type="submit">Confirm I can do this</button>
