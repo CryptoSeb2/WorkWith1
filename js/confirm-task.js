@@ -32,17 +32,17 @@ form?.addEventListener("submit", async (e) => {
   const noteEl = document.getElementById("note");
 
   const body = new URLSearchParams({
-    key: SECRET,
-    action: "logconfirmation",
-    task_id: document.getElementById("task_id")?.value || "",
-    poster_uid: document.getElementById("poster_uid")?.value || "",
-    poster_email: document.getElementById("poster_email")?.value || "",
-    worker_uid: document.getElementById("worker_uid")?.value || "",
-    worker_name: document.getElementById("worker_name")?.value || "",
-    worker_email: document.getElementById("worker_email")?.value || "",
-    worker_phone: document.getElementById("worker_phone")?.value || "",
-    note: noteEl ? noteEl.value : "",
-  });
+  key: SECRET,
+  action: "logconfirmation",
+  task_id: document.getElementById("task_id")?.value || "",
+  poster_uid: document.getElementById("poster_uid")?.value || "",
+  poster_email: document.getElementById("poster_email")?.value || "",
+
+  worker_name: document.querySelector('[name="worker_name"]')?.value || "",
+  worker_email: document.querySelector('[name="worker_email"]')?.value || "",
+  worker_phone: document.querySelector('[name="worker_phone"]')?.value || "",
+  note: document.querySelector('[name="note"]')?.value || "",
+});
 
   try {
     const res = await fetch(SCRIPT_URL, {
