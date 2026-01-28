@@ -38,10 +38,10 @@ form?.addEventListener("submit", async (e) => {
   poster_uid: document.getElementById("poster_uid")?.value || "",
   poster_email: document.getElementById("poster_email")?.value || "",
 
-  worker_name: document.querySelector('[name="worker_name"]')?.value || "",
-  worker_email: document.querySelector('[name="worker_email"]')?.value || "",
-  worker_phone: document.querySelector('[name="worker_phone"]')?.value || "",
-  note: document.querySelector('[name="note"]')?.value || "",
+ worker_name: document.getElementById("worker_name")?.value || "",
+worker_email: document.getElementById("worker_email")?.value || "",
+worker_phone: document.getElementById("worker_phone")?.value || "",
+
 });
 
   try {
