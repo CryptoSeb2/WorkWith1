@@ -22,6 +22,15 @@ setVal("poster_email", params.get("poster_email"));
 
 // Optional: if you added worker_uid hidden field, fill it from url too
 setVal("worker_uid", params.get("worker_uid"));
+import { auth } from "./firebase-init.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    setVal("worker_uid", user.uid);
+  }
+});
+
 
 form?.addEventListener("submit", async (e) => {
   e.preventDefault();
